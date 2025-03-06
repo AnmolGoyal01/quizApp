@@ -31,8 +31,8 @@ public class QuizService {
             QuizModel quizModel = new QuizModel();
             quizModel.setTitle(title);
             quizModel.setQuestions(quizQuestions);
-            QuizModel createdQuiz = quizDao.save(quizModel);
-            return new ResponseEntity<>(createdQuiz, HttpStatus.CREATED);
+            quizDao.save(quizModel);
+            return new ResponseEntity<>(quizModel, HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -74,4 +74,20 @@ public class QuizService {
         }
         return new ResponseEntity<>(score, HttpStatus.OK);
     }
+
+    public ResponseEntity<?> deleteQuiz(Integer quizId) {
+        try {
+            Optional<QuizModel> quizFound = quizDao.findById(quizId);
+            if(quizFound.isEmpty()){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            quizDao.deleteById(quizId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }

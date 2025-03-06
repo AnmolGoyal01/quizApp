@@ -28,4 +28,8 @@ public class QuizController {
     public ResponseEntity<?> submitQuiz(@PathVariable Integer quizId, @RequestParam List<Response> responses) {
         return quizService.submitQuiz(quizId, responses);
     }
+    @DeleteMapping("id/{quizId}")
+    public ResponseEntity<?> deleteQuiz(@PathVariable Integer quizId) {
+        return quizService.deleteQuiz(quizId);
+    }
 }

@@ -1,9 +1,6 @@
 package com.example.quiz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Table(name = "quiz_table")
 public class QuizModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
     @ManyToMany
